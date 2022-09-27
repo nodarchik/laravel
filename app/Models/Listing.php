@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Listing extends Model
 {
-   use HasFactory;
+    use HasFactory;
+
+    protected $fillable = ['name','country','date'];
 }

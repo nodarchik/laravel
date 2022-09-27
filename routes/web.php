@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ListingController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Models\listing;
 /*
@@ -13,15 +15,26 @@ use App\Models\listing;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', [ListingController::class,'index']);
 
-Route::get('/', function () {
-    return view('listings',[
-        'heading'=>'Latest Listings',
-        'listings'=>Listing::all()
-        ]);
-});
-Route::get('/listings/{id}', function ($id){
-   return view('listing', [
-      'listing'=>Listing::find($id)
-   ]);
-});
+Route::get('/listings/create',[ListingController::class,'create']);
+
+Route::post('/listings', [ListingController::class,'store']);
+
+Route::get('/listings/{listing}', [ListingController::class,'show']);
+
+
+
+
+
+
+
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
